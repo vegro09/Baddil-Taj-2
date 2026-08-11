@@ -1,0 +1,100 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Auth helpers
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    // Rules for users/{userId}
+    match /users/{userId} {
+      allow read, write: if true;
+    }
+
+    // Rules for profiles/{userId}
+    match /profiles/{userId} {
+      allow read, write: if true;
+    }
+
+    // Rules for listings/{listingId}
+    match /listings/{listingId} {
+      allow read, write: if true;
+    }
+
+    // Rules for favorites/{favoriteId}
+    match /favorites/{favoriteId} {
+      allow read, write: if true;
+    }
+
+    // Rules for conversations/{conversationId}
+    match /conversations/{conversationId} {
+      allow read, write: if true;
+    }
+
+    // Rules for conversations/{conversationId}/messages/{messageId}
+    match /conversations/{conversationId}/messages/{messageId} {
+      allow read, write: if true;
+    }
+
+    // Rules for listing_boosts/{boostId}
+    match /listing_boosts/{boostId} {
+      allow read, write: if true;
+    }
+
+    // Rules for exchanges/{exchangeId}
+    match /exchanges/{exchangeId} {
+      allow read, write: if true;
+    }
+
+    // Rules for exchanges/{exchangeId}/details/{detailId}
+    match /exchanges/{exchangeId}/details/{detailId} {
+      allow read, write: if true;
+    }
+
+    // Rules for user_ratings/{ratingId}
+    match /user_ratings/{ratingId} {
+      allow read, write: if true;
+    }
+
+    // Rules for admin_settings/{settingId}
+    match /admin_settings/{settingId} {
+      allow read, write: if true;
+    }
+
+    // Rules for feedback/{feedbackId}
+    match /feedback/{feedbackId} {
+      allow read, write: if true;
+    }
+
+    // Rules for support_tickets/{ticketId}
+    match /support_tickets/{ticketId} {
+      allow read, write: if true;
+    }
+
+    // Rules for admin_audit_logs/{logId}
+    match /admin_audit_logs/{logId} {
+      allow read, write: if true;
+    }
+
+    // Rules for admin_notes/{noteId}
+    match /admin_notes/{noteId} {
+      allow read, write: if true;
+    }
+
+    // Rules for reports/{reportId}
+    match /reports/{reportId} {
+      allow read, write: if true;
+    }
+
+    // Rules for system_announcements/{announcementId}
+    match /system_announcements/{announcementId} {
+      allow read, write: if true;
+    }
+
+    // Fallback block all remaining collections
+    match /{document=**} {
+      allow read, write: if true;
+    }
+  }
+}

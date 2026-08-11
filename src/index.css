@@ -1,0 +1,116 @@
+@import "tailwindcss";
+
+:root {
+  --bg-app: #f8fafc;
+  --bg-card: #ffffff;
+  --border-color: #f1f5f9;
+  --border-slate-200: #e2e8f0;
+  --text-primary: #1e293b;
+  --text-primary-heavy: #0f172a;
+  --text-primary-medium: #334155;
+  --text-secondary-heavy: #475569;
+  --text-secondary: #64748b;
+  --text-muted: #94a3b8;
+  --bg-slate-100: #f1f5f9;
+}
+
+.dark {
+  --bg-app: #0b0f19;
+  --bg-card: #151d30;
+  --border-color: #242f49;
+  --border-slate-200: #2c3a59;
+  --text-primary: #f1f5f9;
+  --text-primary-heavy: #ffffff;
+  --text-primary-medium: #cbd5e1;
+  --text-secondary-heavy: #94a3b8;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --bg-slate-100: #202b44;
+}
+
+@theme {
+  --font-sans: "Cairo", "Inter", ui-sans-serif, system-ui, sans-serif;
+}
+
+@variant dark (&:where(.dark, .dark *));
+
+/* Apply variables to class selectors under dark mode class */
+.dark .bg-white {
+  background-color: var(--bg-card) !important;
+}
+.dark .bg-slate-50 {
+  background-color: var(--bg-app) !important;
+}
+.dark .bg-slate-100 {
+  background-color: var(--bg-slate-100) !important;
+}
+.dark .text-slate-900 {
+  color: var(--text-primary-heavy) !important;
+}
+.dark .text-slate-800 {
+  color: var(--text-primary) !important;
+}
+.dark .text-slate-700 {
+  color: var(--text-primary-medium) !important;
+}
+.dark .text-slate-600 {
+  color: var(--text-secondary-heavy) !important;
+}
+.dark .text-slate-500 {
+  color: var(--text-secondary) !important;
+}
+.dark .text-slate-400 {
+  color: var(--text-muted) !important;
+}
+.dark .border-slate-50 {
+  border-color: var(--border-color) !important;
+}
+.dark .border-slate-100 {
+  border-color: var(--border-color) !important;
+}
+.dark .border-slate-200 {
+  border-color: var(--border-slate-200) !important;
+}
+
+/* Custom visual utilities */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 9999px;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: #334155;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #475569;
+}
+
+/* Custom class selectors */
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-none {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.golden-glow-card {
+  border: 1.5px solid #d4af37 !important;
+  box-shadow: 0 0 12px rgba(212, 175, 55, 0.2) !important;
+}
+
+

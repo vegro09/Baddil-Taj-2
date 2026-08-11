@@ -1,0 +1,226 @@
+{
+  "entities": {
+    "profile": {
+      "title": "Profile",
+      "description": "User profile containing public code, location, and rating details",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "display_name": { "type": "string" },
+        "profile_image_url": { "type": "string" },
+        "username": { "type": "string" },
+        "country": { "type": "string" },
+        "governorate": { "type": "string" },
+        "city": { "type": "string" },
+        "approximate_latitude": { "type": "number" },
+        "approximate_longitude": { "type": "number" },
+        "bio": { "type": "string" },
+        "average_rating": { "type": "number" },
+        "ratings_count": { "type": "number" },
+        "active_listings_count": { "type": "number" },
+        "completed_exchanges_count": { "type": "number" },
+        "created_at": { "type": "string", "format": "date-time" },
+        "updated_at": { "type": "string", "format": "date-time" },
+        "termsAccepted": { "type": "boolean" },
+        "termsAcceptedAt": { "type": "string", "format": "date-time" },
+        "termsVersion": { "type": "string" },
+        "privacyAccepted": { "type": "boolean" },
+        "privacyAcceptedAt": { "type": "string", "format": "date-time" },
+        "privacyVersion": { "type": "string" },
+        "legalAccepted": { "type": "boolean" },
+        "legalAcceptedAt": { "type": "string", "format": "date-time" },
+        "legalVersion": { "type": "string" },
+        "appLanguageAtConsent": { "type": "string" },
+        "consentSource": { "type": "string" }
+      },
+      "required": ["id", "display_name", "username"]
+    },
+    "listing": {
+      "title": "Listing",
+      "description": "Barter listings representing items up for exchange",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "owner_id": { "type": "string" },
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "category": { "type": "string" },
+        "condition": { "type": "string" },
+        "country": { "type": "string" },
+        "governorate": { "type": "string" },
+        "city": { "type": "string" },
+        "approximate_latitude": { "type": "number" },
+        "approximate_longitude": { "type": "number" },
+        "images": { "type": "array" },
+        "videos": { "type": "array" },
+        "desired_exchange": { "type": "string" },
+        "exchange_preferences": { "type": "string" },
+        "status": { "type": "string" },
+        "is_active": { "type": "boolean" },
+        "is_boosted": { "type": "boolean" },
+        "boosted_until": { "type": "string", "format": "date-time" },
+        "exchanged_at": { "type": "string", "format": "date-time" },
+        "exchanged_with_user_id": { "type": "string" },
+        "created_at": { "type": "string", "format": "date-time" },
+        "updated_at": { "type": "string", "format": "date-time" },
+        "listingPolicyConfirmed": { "type": "boolean" },
+        "listingPolicyConfirmedAt": { "type": "string", "format": "date-time" },
+        "listingPolicyVersion": { "type": "string" }
+      },
+      "required": ["id", "owner_id", "title", "description", "category", "condition", "status", "is_active"]
+    },
+    "favorite": {
+      "title": "Favorite",
+      "description": "User favorite listings",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "user_id": { "type": "string" },
+        "listing_id": { "type": "string" },
+        "created_at": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "user_id", "listing_id", "created_at"]
+    },
+    "chat": {
+      "title": "Chat",
+      "description": "Conversations between prospective barter users regarding a specific listing",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "listing_id": { "type": "string" },
+        "participant_one_id": { "type": "string" },
+        "participant_two_id": { "type": "string" },
+        "last_message": { "type": "string" },
+        "last_message_at": { "type": "string", "format": "date-time" },
+        "created_at": { "type": "string", "format": "date-time" },
+        "updated_at": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "listing_id", "participant_one_id", "participant_two_id"]
+    },
+    "message": {
+      "title": "Message",
+      "description": "Individual messages within a chat thread",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "chat_id": { "type": "string" },
+        "sender_id": { "type": "string" },
+        "message_type": { "type": "string" },
+        "text_content": { "type": "string" },
+        "media_url": { "type": "string" },
+        "thumbnail_url": { "type": "string" },
+        "audio_url": { "type": "string" },
+        "audio_duration": { "type": "number" },
+        "latitude": { "type": "number" },
+        "longitude": { "type": "number" },
+        "listing_id": { "type": "string" },
+        "exchange_id": { "type": "string" },
+        "metadata": { "type": "object" },
+        "delivery_status": { "type": "string" },
+        "created_at": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "chat_id", "sender_id", "message_type", "created_at"]
+    },
+    "listing_boost": {
+      "title": "ListingBoost",
+      "description": "Records tracking rewarded ad watches to boost status",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "listing_id": { "type": "string" },
+        "user_id": { "type": "string" },
+        "ads_watched_count": { "type": "number" },
+        "status": { "type": "string" },
+        "boost_started_at": { "type": "string", "format": "date-time" },
+        "boosted_until": { "type": "string", "format": "date-time" },
+        "created_at": { "type": "string", "format": "date-time" },
+        "updated_at": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "listing_id", "user_id", "ads_watched_count", "status"]
+    },
+    "exchange": {
+      "title": "Exchange",
+      "description": "Records tracking barter transactions",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "listing_id": { "type": "string" },
+        "owner_id": { "type": "string" },
+        "exchanged_with_user_id": { "type": "string" },
+        "status": { "type": "string" },
+        "created_at": { "type": "string", "format": "date-time" },
+        "updated_at": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "listing_id", "owner_id", "exchanged_with_user_id", "status", "created_at"]
+    },
+    "exchange_details": {
+      "title": "ExchangeDetails",
+      "description": "Submitted description or photos of the exchanged items from the other party",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "exchange_id": { "type": "string" },
+        "submitted_by_user_id": { "type": "string" },
+        "description": { "type": "string" },
+        "image_urls": { "type": "array" },
+        "skipped": { "type": "boolean" },
+        "created_at": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "exchange_id", "submitted_by_user_id", "skipped", "created_at"]
+    },
+    "user_rating": {
+      "title": "UserRating",
+      "description": "Post-exchange rating from one peer to another",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "exchange_id": { "type": "string" },
+        "listing_id": { "type": "string" },
+        "reviewer_user_id": { "type": "string" },
+        "reviewed_user_id": { "type": "string" },
+        "rating_value": { "type": "number" },
+        "review_text": { "type": "string" },
+        "created_at": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "exchange_id", "listing_id", "reviewer_user_id", "reviewed_user_id", "rating_value", "created_at"]
+    }
+  },
+  "firestore": {
+    "/profiles/{profileId}": {
+      "schema": "profile",
+      "description": "Public and private user profiles"
+    },
+    "/listings/{listingId}": {
+      "schema": "listing",
+      "description": "Barter and exchange item listings"
+    },
+    "/favorites/{favoriteId}": {
+      "schema": "favorite",
+      "description": "Items favorited by users"
+    },
+    "/conversations/{conversationId}": {
+      "schema": "chat",
+      "description": "Private visual or status channels for communication"
+    },
+    "/conversations/{conversationId}/messages/{messageId}": {
+      "schema": "message",
+      "description": "Messages inside a specific conversation room"
+    },
+    "/listing_boosts/{boostId}": {
+      "schema": "listing_boost",
+      "description": "Rewarded video token counts for listing boosting"
+    },
+    "/exchanges/{exchangeId}": {
+      "schema": "exchange",
+      "description": "Barter transaction sessions"
+    },
+    "/exchanges/{exchangeId}/details/{detailId}": {
+      "schema": "exchange_details",
+      "description": "User description of items bartered after transaction"
+    },
+    "/user_ratings/{ratingId}": {
+      "schema": "user_rating",
+      "description": "Ratings provided post-transaction"
+    }
+  }
+}

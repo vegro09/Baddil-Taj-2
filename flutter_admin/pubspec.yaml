@@ -1,0 +1,28 @@
+name: baddil_admin_panel
+description: "A production-ready Flutter Admin Panel for the Baddil (بدل) application with full Firebase integration."
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.5
+  firebase_core: ^2.24.0
+  firebase_auth: ^4.15.0
+  cloud_firestore: ^4.13.0
+  firebase_storage: ^11.5.0
+  firebase_messaging: ^14.7.5
+  provider: ^6.1.1
+  intl: ^0.18.1
+  cached_network_image: ^3.3.1
+  flutter_spinkit: ^5.2.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.1
+
+flutter:
+  uses-material-design: true

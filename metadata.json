@@ -1,0 +1,6 @@
+{
+  "name": "Badal - Smart Barter Platform",
+  "description": "Smart platform for bartering, exchanging goods and services in your community.",
+  "requestFramePermissions": ["geolocation", "microphone"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
