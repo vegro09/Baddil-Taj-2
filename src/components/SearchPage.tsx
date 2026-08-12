@@ -7,6 +7,8 @@ import { motion } from 'motion/react';
 import { useTranslation } from './LanguageContext';
 import BoostCountdown from './BoostCountdown';
 
+import { CardSkeleton } from './AppSkeleton';
+
 interface SearchPageProps {
   initialCategory?: string;
   onSelectListing: (id: string) => void;
@@ -350,8 +352,8 @@ export default function SearchPage({
           {loading ? (
             /* skeleton grids */
             <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-              {[1, 2, 3].map((v) => (
-                <div key={v} className="bg-slate-50 rounded-2xl h-60 animate-pulse" />
+              {[1, 2, 3, 4, 5, 6].map((v) => (
+                <CardSkeleton key={v} />
               ))}
             </div>
           ) : listings.length === 0 ? (

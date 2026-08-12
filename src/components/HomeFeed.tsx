@@ -23,6 +23,8 @@ import { motion } from 'motion/react';
 import { useTranslation } from './LanguageContext';
 import BoostCountdown from './BoostCountdown';
 
+import { CardSkeleton } from './AppSkeleton';
+
 interface HomeFeedProps {
   onSelectListing: (id: string) => void;
   onNavigateToSearch: (category?: string) => void;
@@ -203,13 +205,8 @@ export default function HomeFeed({
         {loading ? (
           /* Visual Skeleton Loader Skeletons */
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-            {[1, 2, 3, 4].map((id) => (
-              <div key={id} className="bg-slate-50 border border-slate-100 rounded-2xl p-3 animate-pulse space-y-3">
-                <div className="bg-slate-200 rounded-xl h-36 w-full" />
-                <div className="bg-slate-200 rounded-lg h-4 w-3/4" />
-                <div className="bg-slate-200 rounded-lg h-3 w-1/2" />
-                <div className="bg-slate-200 rounded-lg h-3 w-5/6" />
-              </div>
+            {[1, 2, 3, 4, 5, 6].map((id) => (
+              <CardSkeleton key={id} />
             ))}
           </div>
         ) : listings.length === 0 ? (

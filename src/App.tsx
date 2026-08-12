@@ -17,6 +17,7 @@ const AdminDashboard = lazy(() => import('./components/AdminDashboard'));
 const LegalPage = lazy(() => import('./components/LegalPage'));
 const ConsentBlockingScreen = lazy(() => import('./components/ConsentBlockingScreen'));
 
+import AppSkeleton, { CardSkeleton, ListingDetailsSkeleton, ChatRoomSkeleton, ProfileSkeleton } from './components/AppSkeleton';
 import { dbService } from './db/dbService';
 import { auth, isMockMode } from './db/firebase';
 import { useTranslation } from './components/LanguageContext';
@@ -568,16 +569,9 @@ export default function App() {
     }
   };
 
-  // Show beautiful centering loading screen for secure session checks
+  // Show cohesive skeleton loading screen for secure session checks
   if (authLoading) {
-    return (
-      <div className="min-h-screen bg-slate-50 flex flex-col items-center justify-center text-slate-500" dir={direction}>
-        <div className="bg-gradient-to-tr from-emerald-600 to-teal-500 text-white p-4 rounded-3xl shadow-xl shadow-emerald-500/10 mb-4 animate-bounce">
-          <Landmark className="h-10 w-10 text-white" />
-        </div>
-        <p className="text-sm font-black text-slate-700 animate-pulse">جاري التحقق من أمان الجلسة...</p>
-      </div>
-    );
+    return <AppSkeleton />;
   }
 
   if ((activeTab as any) === 'admin') {
@@ -627,15 +621,9 @@ export default function App() {
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.2 }}
           >
-            {/* Suspense placeholder wrapper for Dynamic Code Splitting optimization */}
-            <Suspense fallback={
-              <div className="flex-1 flex flex-col items-center justify-center py-20 min-h-[350px]" dir="rtl">
-                <Loader2 className="h-9 w-9 text-emerald-600 animate-spin mb-3" />
-                <p className="text-slate-500 text-xs font-bold">جاري تحميل الصفحة...</p>
-              </div>
-            }>
-              {/* If viewing single Listing details */}
-              {selectedListingId ? (
+            {/* If viewing single Listing details */}
+            {selectedListingId ? (
+              <Suspense fallback={<ListingDetailsSkeleton />}>
                 <ListingDetailsPage
                   listingId={selectedListingId}
                   onBack={() => setSelectedListingId(null)}
@@ -643,8 +631,10 @@ export default function App() {
                   onToggleFavorite={handleToggleFavorite}
                   onStartChat={handleStartChat}
                 />
-              ) : activeChatId ? (
-                /* If inside chat room discussions */
+              </Suspense>
+            ) : activeChatId ? (
+              /* If inside chat room discussions */
+              <Suspense fallback={<ChatRoomSkeleton />}>
                 <ChatRoomPage
                   chatId={activeChatId}
                   onBack={() => setActiveChatId(null)}
@@ -653,8 +643,19 @@ export default function App() {
                     setActiveChatId(null);
                   }}
                 />
-              ) : (
-                /* Standard Router Tab selections */
+              </Suspense>
+            ) : (
+              /* Standard Router Tab selections */
+              <Suspense fallback={
+                <div className="w-full space-y-6" dir="rtl">
+                  <div className="w-full h-32 rounded-3xl bg-slate-200 dark:bg-slate-800/80 animate-pulse" />
+                  <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
+                    {[1, 2, 3, 4].map((n) => (
+                      <CardSkeleton key={n} />
+                    ))}
+                  </div>
+                </div>
+              }>
                 <>
                   {/* Email Verification Page */}
                   {((activeTab as any) === 'verify_email') && (
@@ -722,17 +723,19 @@ export default function App() {
                   )}
 
                   {activeTab === 'profile' && (
-                    <ProfilePage
-                      onSelectListing={setSelectedListingId}
-                      favorites={favorites}
-                      onToggleFavorite={handleToggleFavorite}
-                      onLogoutClick={handleLogoutClick}
-                      onOpenLegal={() => {
-                        setLegalTab('terms');
-                        setLegalBackTarget('profile');
-                        setActiveTab('legal' as any);
-                      }}
-                    />
+                    <Suspense fallback={<ProfileSkeleton />}>
+                      <ProfilePage
+                        onSelectListing={setSelectedListingId}
+                        favorites={favorites}
+                        onToggleFavorite={handleToggleFavorite}
+                        onLogoutClick={handleLogoutClick}
+                        onOpenLegal={() => {
+                          setLegalTab('terms');
+                          setLegalBackTarget('profile');
+                          setActiveTab('legal' as any);
+                        }}
+                      />
+                    </Suspense>
                   )}
 
                   {activeTab === 'favorites' && (
@@ -744,8 +747,8 @@ export default function App() {
                     />
                   )}
                 </>
-              )}
-            </Suspense>
+              </Suspense>
+            )}
           </motion.div>
         </AnimatePresence>
       </main>

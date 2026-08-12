@@ -252,7 +252,22 @@ export default function ChatsPage({ onSelectChat }: ChatsPageProps) {
         )}
       </div>
 
-      {items.length === 0 ? (
+      {loading ? (
+        <div className="space-y-3.5 animate-pulse">
+          {[1, 2, 3, 4].map((n) => (
+            <div key={n} className="bg-white dark:bg-[#1b2438] p-4 rounded-2xl border border-slate-100 dark:border-slate-800 flex items-center justify-between gap-3">
+              <div className="flex items-center gap-3 flex-1">
+                <div className="w-12 h-12 rounded-full bg-slate-200 dark:bg-slate-800 shrink-0" />
+                <div className="space-y-2 flex-1">
+                  <div className="w-32 h-4 rounded bg-slate-200 dark:bg-slate-800" />
+                  <div className="w-48 h-3 rounded bg-slate-100 dark:bg-slate-800/60" />
+                </div>
+              </div>
+              <div className="w-14 h-14 rounded-xl bg-slate-200 dark:bg-slate-800 shrink-0" />
+            </div>
+          ))}
+        </div>
+      ) : items.length === 0 ? (
         <div className="bg-slate-50/60 rounded-3xl border border-dashed border-slate-200 py-16 text-center text-slate-500">
           <MessageSquare className="mx-auto h-12 w-12 text-slate-300 mb-3" />
           <p className="text-sm font-bold leading-normal text-slate-600">
